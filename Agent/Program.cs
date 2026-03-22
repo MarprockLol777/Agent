@@ -23,7 +23,7 @@ class Program
         {
             Console.WriteLine("1. Add Contact");
             Console.WriteLine("2. Show Contacts");
-            Console.WriteLine("3. Search Contact (by ID)");
+            Console.WriteLine("3. Search Contact");
             Console.WriteLine("4. Edit Contact");
             Console.WriteLine("5. Delete Contact");
             Console.WriteLine("6. Exit");
@@ -151,13 +151,14 @@ class Program
         {
             string best = bestFriends[id] ? "Yes" : "No";
 
-            Console.WriteLine($"|Id:{id} | Name:{names[id]} |Lastname{lastnames[id]} |Phone number {phones[id]} |Email {emails[id]} | Age: {ages[id]} | Best Frie: {best}");
+            Console.WriteLine($"|Id:{id} | Name:{names[id]} |Lastname: {lastnames[id]} |Phone number: {phones[id]} |Email: {emails[id]} | Age: {ages[id]} | is your Best Friend: {best}");
         }
     }
 
     static void SearchContact(List<int> ids, Dictionary<int, string> names,
-        Dictionary<int, string> lastnames, Dictionary<int, string> phones,
-        Dictionary<int, string> emails)
+        Dictionary<int, string> lastnames, Dictionary<int, string> addresses,
+        Dictionary<int, string> phones, Dictionary<int, string> emails,
+        Dictionary<int, int> ages, Dictionary<int, bool> bestFriends)
     {
         Console.WriteLine("Enter ID to search:");
 
@@ -175,7 +176,7 @@ class Program
 
         if (names.ContainsKey(id))
         {
-            Console.WriteLine($"{id} - {names[id]} {lastnames[id]} | {phones[id]} | {emails[id]}");
+            Console.WriteLine($"|Id:{id} | Name:{names[id]} |Lastname: {lastnames[id]} |Phone number: {phones[id]} |Email: {emails[id]} | Age: {ages[id]} | is your Best Friend: {bestFriends}");
         }
         else
         {
