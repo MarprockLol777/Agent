@@ -151,7 +151,7 @@ class Program
         {
             string best = bestFriends[id] ? "Yes" : "No";
 
-            Console.WriteLine($"{id} - {names[id]} {lastnames[id]} | {phones[id]} | {emails[id]} | Age: {ages[id]} | Best Frie: {best}");
+            Console.WriteLine($"|Id:{id} | Name:{names[id]} |Lastname{lastnames[id]} |Phone number {phones[id]} |Email {emails[id]} | Age: {ages[id]} | Best Frie: {best}");
         }
     }
 
