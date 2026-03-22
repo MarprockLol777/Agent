@@ -110,17 +110,25 @@ class Program
         }
 
         Console.WriteLine("Best friend? 1 = Yes, 2 = No");
-        bool isBestFriend = false;
+        int bestOption = 0;
 
         try
         {
-            isBestFriend = Convert.ToInt32(Console.ReadLine()) == 1;
+            bestOption = Convert.ToInt32(Console.ReadLine());
         }
         catch
         {
             Console.WriteLine("Invalid answer");
             return;
         }
+
+        if (bestOption != 1 && bestOption != 2)
+        {
+            Console.WriteLine("Only 1 or 2!");
+            return;
+        }
+
+        bool isBestFriend = bestOption == 1;
 
         int id = ids.Count + 1;
         ids.Add(id);
@@ -176,7 +184,8 @@ class Program
 
         if (names.ContainsKey(id))
         {
-            Console.WriteLine($"|Id:{id} | Name:{names[id]} |Lastname: {lastnames[id]} |Addresses: {addresses[id]} |Phone number: {phones[id]} |Email: {emails[id]} | Age: {ages[id]} | is your Best Friend: {bestFriends[id]}");
+            string best = bestFriends[id] ? "Yes" : "No";
+            Console.WriteLine($"|Id:{id} | Name:{names[id]} |Lastname: {lastnames[id]} |Addresses: {addresses[id]} |Phone number: {phones[id]} |Email: {emails[id]} | Age: {ages[id]} | is your Best Friend: {best}");
         }
         else
         {
@@ -231,20 +240,30 @@ class Program
         }
         catch
         {
-            Console.WriteLine("Wrong age, plisss select a number");
+            Console.WriteLine("Wrong age, please type a number");
             return;
         }
 
         Console.WriteLine("Best friend? 1 = Yes, 2 = No");
+        int bestOption = 0;
+
         try
         {
-            bestFriends[id] = Convert.ToInt32(Console.ReadLine()) == 1;
+            bestOption = Convert.ToInt32(Console.ReadLine());
         }
         catch
         {
-            Console.WriteLine("Wrong option, plisss introduce just the numbers 1 and 2");
+            Console.WriteLine("Invalid answer");
             return;
         }
+
+        if (bestOption != 1 && bestOption != 2)
+        {
+            Console.WriteLine("Only 1 or 2!");
+            return;
+        }
+
+        bestFriends[id] = bestOption == 1;
 
         Console.WriteLine("Contact updated!");
     }
