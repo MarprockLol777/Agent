@@ -21,16 +21,26 @@ class Program
 
         while (running)
         {
-            Console.WriteLine("\1. Add Contact");
+            Console.WriteLine("1. Add Contact");
             Console.WriteLine("2. Show Contacts");
-            Console.WriteLine("3. Search Contact");
+            Console.WriteLine("3. Search Contact (by ID)");
             Console.WriteLine("4. Edit Contact");
             Console.WriteLine("5. Delete Contact");
             Console.WriteLine("6. Exit");
 
             Console.WriteLine("Choose option:");
 
-            int option = Convert.ToInt32(Console.ReadLine());
+            int option = 0;
+
+            try
+            {
+                option = Convert.ToInt32(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine("Only numbers!");
+                continue;
+            }
 
             switch (option)
             {
@@ -43,7 +53,7 @@ class Program
                     break;
 
                 case 3:
-                    SearchContact(ids, names, lastnames);
+                    SearchContact(ids, names, lastnames, phones, emails);
                     break;
 
                 case 4:
@@ -87,21 +97,41 @@ class Program
         string email = Console.ReadLine();
 
         Console.WriteLine("Enter age:");
-        int age = Convert.ToInt32(Console.ReadLine());
+        int age = 0;
+
+        try
+        {
+            age = Convert.ToInt32(Console.ReadLine());
+        }
+        catch
+        {
+            Console.WriteLine("Invalid Age");
+            return;
+        }
 
         Console.WriteLine("Best friend? 1 = Yes, 2 = No");
-        bool isBestFriend = Convert.ToInt32(Console.ReadLine()) == 1;
+        bool isBestFriend = false;
+
+        try
+        {
+            isBestFriend = Convert.ToInt32(Console.ReadLine()) == 1;
+        }
+        catch
+        {
+            Console.WriteLine("Invalid answer");
+            return;
+        }
 
         int id = ids.Count + 1;
         ids.Add(id);
 
-        names.Add(id, name);
-        lastnames.Add(id, lastname);
-        addresses.Add(id, address);
-        phones.Add(id, phone);
-        emails.Add(id, email);
-        ages.Add(id, age);
-        bestFriends.Add(id, isBestFriend);
+        names[id] = name;
+        lastnames[id] = lastname;
+        addresses[id] = address;
+        phones[id] = phone;
+        emails[id] = email;
+        ages[id] = age;
+        bestFriends[id] = isBestFriend;
 
         Console.WriteLine("Contact added!");
     }
@@ -121,22 +151,35 @@ class Program
         {
             string best = bestFriends[id] ? "Yes" : "No";
 
-            Console.WriteLine($"{id} - {names[id]} {lastnames[id]} | {phones[id]} | {emails[id]} | Age: {ages[id]} | Best: {best}");
+            Console.WriteLine($"{id} - {names[id]} {lastnames[id]} | {phones[id]} | {emails[id]} | Age: {ages[id]} | Best Frie: {best}");
         }
     }
 
     static void SearchContact(List<int> ids, Dictionary<int, string> names,
-        Dictionary<int, string> lastnames)
+        Dictionary<int, string> lastnames, Dictionary<int, string> phones,
+        Dictionary<int, string> emails)
     {
-        Console.WriteLine("Enter name to search:");
-        string search = Console.ReadLine();
+        Console.WriteLine("Enter ID to search:");
 
-        foreach (int id in ids)
+        int id = 0;
+
+        try
         {
-            if (names[id] == search)
-            {
-                Console.WriteLine($"{id} - {names[id]} {lastnames[id]}");
-            }
+            id = Convert.ToInt32(Console.ReadLine());
+        }
+        catch
+        {
+            Console.WriteLine("Invalid ID");
+            return;
+        }
+
+        if (names.ContainsKey(id))
+        {
+            Console.WriteLine($"{id} - {names[id]} {lastnames[id]} | {phones[id]} | {emails[id]}");
+        }
+        else
+        {
+            Console.WriteLine("Contact not found");
         }
     }
 
@@ -187,7 +230,7 @@ class Program
         }
         catch
         {
-            Console.WriteLine("Wrong age, keeping old one");
+            Console.WriteLine("Wrong age, keeping old");
         }
 
         Console.WriteLine("Best friend? 1 = Yes, 2 = No");
@@ -197,7 +240,7 @@ class Program
         }
         catch
         {
-            Console.WriteLine("Wrong option, keeping old value");
+            Console.WriteLine("Wrong option, keeping old");
         }
 
         Console.WriteLine("Contact updated!");
@@ -209,7 +252,18 @@ class Program
         Dictionary<int, int> ages, Dictionary<int, bool> bestFriends)
     {
         Console.WriteLine("Enter ID to delete:");
-        int id = Convert.ToInt32(Console.ReadLine());
+
+        int id = 0;
+
+        try
+        {
+            id = Convert.ToInt32(Console.ReadLine());
+        }
+        catch
+        {
+            Console.WriteLine("Invalid ID");
+            return;
+        }
 
         if (names.ContainsKey(id))
         {
