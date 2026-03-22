@@ -53,7 +53,7 @@ class Program
                     break;
 
                 case 3:
-                    SearchContact(ids, names, lastnames, phones, emails);
+                    SearchContact(ids, names, lastnames, addresses, phones, emails, ages, bestFriends);
                     break;
 
                 case 4:
@@ -151,7 +151,7 @@ class Program
         {
             string best = bestFriends[id] ? "Yes" : "No";
 
-            Console.WriteLine($"|Id:{id} | Name:{names[id]} |Lastname: {lastnames[id]} |Phone number: {phones[id]} |Email: {emails[id]} | Age: {ages[id]} | is your Best Friend: {best}");
+            Console.WriteLine($"|Id:{id} | Name:{names[id]} |Lastname: {lastnames[id]} |Addresses: {addresses[id]} |Phone number: {phones[id]} |Email: {emails[id]} | Age: {ages[id]} | is your Best Friend: {best}");
         }
     }
 
@@ -176,7 +176,7 @@ class Program
 
         if (names.ContainsKey(id))
         {
-            Console.WriteLine($"|Id:{id} | Name:{names[id]} |Lastname: {lastnames[id]} |Phone number: {phones[id]} |Email: {emails[id]} | Age: {ages[id]} | is your Best Friend: {bestFriends}");
+            Console.WriteLine($"|Id:{id} | Name:{names[id]} |Lastname: {lastnames[id]} |Addresses: {addresses[id]} |Phone number: {phones[id]} |Email: {emails[id]} | Age: {ages[id]} | is your Best Friend: {bestFriends[id]}");
         }
         else
         {
@@ -231,7 +231,8 @@ class Program
         }
         catch
         {
-            Console.WriteLine("Wrong age, keeping old");
+            Console.WriteLine("Wrong age, plisss select a number");
+            return;
         }
 
         Console.WriteLine("Best friend? 1 = Yes, 2 = No");
@@ -241,7 +242,8 @@ class Program
         }
         catch
         {
-            Console.WriteLine("Wrong option, keeping old");
+            Console.WriteLine("Wrong option, plisss introduce just the numbers 1 and 2");
+            return;
         }
 
         Console.WriteLine("Contact updated!");
