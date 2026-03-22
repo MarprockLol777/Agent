@@ -21,13 +21,18 @@ class Program
 
         while (running)
         {
+
+            Console.WriteLine(new string('=', 50));
+            Console.WriteLine("        Marcos Eliu Cuevas Jimenez 2025 - 1883");
+            Console.WriteLine("        MY PERSONAL AGENT ");
+            Console.WriteLine(new string('=', 50));
             Console.WriteLine("1. Add Contact");
             Console.WriteLine("2. Show Contacts");
             Console.WriteLine("3. Search Contact");
             Console.WriteLine("4. Edit Contact");
             Console.WriteLine("5. Delete Contact");
             Console.WriteLine("6. Exit");
-
+            Console.WriteLine(new string('-', 50));
             Console.WriteLine("Choose option:");
 
             int option = 0;
